@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <h1>Listagem de Clientes</h1>
+    <p>Cliente já cadastrados no sistema</p>
+
+    <table>
+      <tr style="background-color: darkgray;">
+        <td style="width:50%;">Nome</td>
+        <td style="width:15%;">Idade</td>
+        <td style="width:15%;">Uf</td>
+        <td colspan="2">Ações</td>
+      </tr>
+      <% if(!docs || docs.length == 0) { %>
+      <tr>
+        <td>Nenhum cliente cadastrado</td>
+      </tr>
+      <% } else {
+            docs.forEach(customer => {%>
+            
+              <tr>
+
+                <td><%= customer.nome %></td>
+                <td><%= customer.idade %></td>
+                <td><%= customer.uf %></td>
+                <td><a href="/edit/<%= customer._id %>">Editar</a></td>
+                <td><a href="/delete/<%= customer._id %>" onclick="return confirm('Tem certeza?')">Apagar</a></td>
+
+              </tr>
+
+           <% })
+      }%>
+    </table>
+
+    <a href="<%= action %>">Cadastrar novo</a>
+
+    <script>
+      if(location.href.indexOf('delete=true') != -1){
+        alert("Cliente excluído com sucesso");
+      }
+      else if(location.href.indexOf('edit=true') != -1){
+        alert("Cliente alterado com sucesso");
+      }
+      else if(location.href.indexOf('new=true') != -1){
+        alert("Cliente cadastrado com sucesso");
+      }
+      else if(location.href.indexOf('erro=true') != -1){
+        alert("Ocorreu um erro");
+      }
+    </script>
+
+  </body>
+</html>
