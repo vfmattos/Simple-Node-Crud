@@ -2,7 +2,7 @@ const {MongoClient, ObjectId} = require("mongodb");
 
 async function connect(){
     if(global.db) return global.db;
-    const client = new MongoClient("");
+    const client = new MongoClient(""); //Adicione a string de conexão do mongoDB
     await client.connect();
     global.db = client.db("workshop");
     return global.db;
